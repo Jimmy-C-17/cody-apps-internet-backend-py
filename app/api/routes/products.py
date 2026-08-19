@@ -22,6 +22,7 @@ def read_product(product_id: int, session: SessionDep, current_user: CurrentUser
         raise HTTPException(status_code=404, detail="Producto no encontrado ❌")
     return product
 
+@router.put("/{product_id}", response_model=ProductPublic)
 @router.patch("/{product_id}", response_model=ProductPublic)
 def update_product(product_id: int, product_in: ProductUpdate, session: SessionDep, current_user: CurrentUser) -> Any:
     product = product_service.update_product(session=session, product_id=product_id, product_in=product_in)
